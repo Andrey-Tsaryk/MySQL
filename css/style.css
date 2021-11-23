@@ -18,7 +18,7 @@ a {
   transition: 0.2s ease;
   color: #3f75c5;
 }
-td:nth-child(7) > a {
+td:nth-child(6) > a {
   color: #c22a2a;
 }
 a:hover {

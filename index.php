@@ -1,10 +1,13 @@
 <?php
-    require_once 'config/connect.php';
-
+    require_once 'config/connect.php'; // Соединение
+    $goods = mysqli_query($connect, "SELECT * FROM `goods`");  // Запрос
+    var_dump( $goods);                                              
+    
+    $goods = mysqli_fetch_all($goods);
+    
+    
 ?>
-
-
-
+//  ПРОДОЛЖИТЬ С 47:00 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,13 +25,36 @@
             <th>Название</th>
             <th>Описание</th>
             <th>Цена</th>
+            <th>&#9998;</th>
+            <th>&#10006;</th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>Товар 1</td>
-            <td>Описание товара 1</td>
-            <td>500</td>
-        </tr>
-    </table>   
+        <?php
+            foreach($goods as $item){
+            ?>
+                <tr>
+                    <td><?= $item[0] ?></td>
+                    <td><?= $item[1] ?></td>
+                    <td><?= $item[2] ?></td>
+                    <td><?= $item[3] ?></td>
+                    <td><a href="update.php?id=<?= $item[0] ?>">Обновить</a></td>
+                    <td><a href="vendor/delete.php?id=<?= $item[0] ?>">Удалить</a></td>
+                </tr> 
+            <?php
+            }
+        ?>
+    </table>
+    <h2>Добавить нвый товар</h2>
+    <form action="vendor/create.php" method="post">
+        <p>Название</p>
+        <input type="text" name="title">
+
+        <p>Описание</p>
+        <textarea name="description"></textarea>
+
+        <p>Цена</p>
+        <input type="number" name="price">
+        <button type="submit">Добавить</button>
+
+    </form>   
 </body>
 </html>
